@@ -1,0 +1,52 @@
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+:root {
+    --black: #222;
+    --grey: #6A6E71;
+    --white: #fff;
+    --bg-color: #1B2431;
+    --tealish-blue: #2B60DE;
+}
+@font-face {
+    font-family: 'amidone';
+    src: url("/assets/fonts/AmidoneGrotesk.ttf") format("truetype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'qualy';
+    src: url("/assets/fonts/Qualy\ Bold.ttf") format("truetype");
+    font-display: swap;
+    font-weight: 500;
+}
+body {
+    background-color: var(--bg-color);
+    font-family: 'amidone';
+    color: #fff;
+}
+a {
+    text-decoration: none;
+}
+.container-fluid {
+    max-width: 1220px;
+}
+#navbar div h1 a {
+    color: var(--white);
+    font-size: 50px;
+}
+#navbar div nav a {
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: .2s ease-out;
+}
+#navbar div nav a:hover {
+    padding: 6px 15px;
+    background-color: var(--tealish-blue);
+}
+#home .content h1 {
+    font-size: 70px;
+}
