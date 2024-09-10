@@ -5,14 +5,14 @@
 }
 
 :root {
-    --black: #222;
+    --black: #22282f;
     --grey: #d1d1de;
     --white: #fff;
     --bg-color: #1d2228;
     --tealish-blue: #2a65f0;
     --main-color: #dc5843;
     --bs-heading-color: #f8c4c4 !important;
-    --h1-font: 3rem;
+    --h1-font: 4.5rem;
     --h2-font: 2.9rem;
     --p-font: 1rem;
 }
@@ -46,7 +46,7 @@ a {
 }
 
 #navbar>header>div:nth-child(1)>h1 {
-    font-size: var(--h1-font);
+    font-size: 45px;
 }
 
 #navbar>header>div:nth-child(2)>a {
@@ -86,12 +86,18 @@ a {
     transform: scale(1.06);
     transition: all 700ms ease;
 }
-.menu-icon{
+
+#navbar>header>div:nth-child(3)>a:last-child {
+    color: var(--main-color);
+}
+
+.menu-icon {
     font-size: 20px;
     color: var(--text-color);
-    cursor: pointer; 
+    cursor: pointer;
 }
-.menu-icon:hover{
+
+.menu-icon:hover {
     text-shadow: 2px 2px 20px var(--text-color);
     color: var(--main-color);
     transition: all 300ms ease;
@@ -118,10 +124,10 @@ a {
     align-items: center;
     justify-content: flex-start;
     display: flex;
-    background: url(../images/profile1.png);
+    background: url(../images/home-page/profile2.jpg);
     background-repeat: no-repeat;
-    background-size: 550px;
-    background-position: right 150px;
+    background-size: 600px;
+    background-position: right 80px;
     overflow-x: hidden !important;
 }
 
@@ -136,7 +142,7 @@ a {
 }
 
 .text-content>h1 {
-    font-size: 60px;
+    font-size: var(--h1-font);
     font-weight: 600;
 }
 
@@ -197,14 +203,76 @@ a {
     transition: all 700ms ease;
 }
 
-#about {
-    height: 200vh;
+#about,
+#services {
+    background-color: var(--black);
+    padding: 110px 0px 100px 0px;
 }
 
-@media (max-width:768px) {
+#about-padding,
+#services-padding {
+    padding: 100px 0px 100px 0px;
+}
+
+#about>div>div:first-child>img {
+    border: 3px solid var(--main-color);
+    box-shadow: 0px 0px 20px 0px rgba(220, 88, 67, .9), 0px 0px 20px 0px rgba(220, 88, 67, .9);
+    border-radius: 50%;
+}
+
+#about>div>div:last-child>div {
+    margin-top: 40px;
+}
+
+#about>div>div:last-child>div>a {
+    padding: 11px 26px;
+    border: 2px solid var(--main-color);
+    border-radius: 8px;
+    transition: all 300ms ease;
+    color: var(--main-color);
+}
+
+#services{
+    background-color: var(--bg-color);
+}
+
+@media (max-width:992px) {
     .hero {
         background-image: none;
         background-position: bottom right 100px;
         background-size: 60vh;
     }
+}
+
+@media (max-width:768px) {
+
+    #about-padding {
+        padding: 60px 50px;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+
+@media (max-width:468px) {
+    #navbar>header>div:nth-child(1)>h1 {
+        font-size: 30px;
+    }
+
+    #navbar>header>div:nth-child(3)>a:first-child {
+        padding: 10px 12px;
+    }
+
+    .text-content>h1 {
+        font-size: 40px;
+    }
+
+    #about>div>div:last-child>h3 {
+        font-size: 22px;
+    }
+
 }
