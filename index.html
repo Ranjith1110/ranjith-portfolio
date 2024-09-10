@@ -18,23 +18,23 @@
 
 <body>
 
-   <!-- Navbar start -->
+   <!-- Navbar Section -->
    <section id="navbar" data-aos="fade-down">
 
       <header class="container d-flex justify-content-between align-items-center">
          <div class="">
             <h1 class="m-0"><a href="#" style="color: #f8c4c4;">Ran<span style="color: #dc5843;">jith</span></a></h1>
          </div>
-         <div class="d-none d-md-flex gap-5">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Service</a>
+         <div class="d-none d-lg-flex gap-5">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Service</a>
             <a href="#">Project</a>
             <a href="#">Contact</a>
          </div>
          <div class="top-btn pe-sm-3 pe-md-5 d-flex justify-content-between align-items-center">
             <a href="#">Contact Me</a>
-            <a href="#" class="menu-icon ps-3 d-md-none"><i class="fa-solid fa-bars"></i></a>
+            <a href="#" class="menu-icon ps-3 d-lg-none"><i class="fa-solid fa-bars"></i></a>
          </div>
       </header>
 
@@ -50,11 +50,11 @@
 
    </section>
 
-   <!---hero section-->
+   <!---Hero section-->
    <section class="hero col-12" id="home">
-      <div class="main-content col-md-6 col-12 d-flex flex-column align-items-center justify-content-center ps-md-5 "
+      <div class="main-content col-md-6 col-12 d-flex flex-column align-items-center justify-content-center ps-md-5"
          data-aos="zoom-in-right">
-         <div class="text-content ps-5">
+         <div class="text-content ps-4">
             <h4>Hi, There!</h4>
             <h1>I'm <span>Ranjith...</span></h1>
             <p>I'm a Front end Web Developer and a Video Editor .</p>
@@ -72,8 +72,66 @@
       </div>
    </section>
 
+   <!-- About Section -->
    <section class="about col-12" id="about">
+      <h2 data-aos="fade-up" class="text-center" style="color: #f8c4c4;">About <span style="color: #dc5843;">Me</span>
+      </h2>
+      <div id="about-padding" class="d-flex align-items-center justify-content-center gap-5">
+         <div data-aos="zoom-in-right">
+            <img width="80%" src="./assets/images/about-page/about-pic.png" alt="">
+         </div>
+         <div data-aos="zoom-in-left">
+            <h3 class="mb-4" style="color: #f8c4c4;">I'm a Front end <span style="color: #dc5843;">Web Developer</span> <span
+                  class="d-block">& a Video Editor.</span></h3>
+            <p style="color: #f8c4c4;">Experience <span style="color: #dc5843;">1 Years</span></p>
+            <p style="color: #f8c4c4;">Address <span style="color: #dc5843;">3/118 Sithali, Perambalur, Tamil Nadu, India </span><i class="fa-solid fa-location-dot"></i></p>
+            <p style="color: #f8c4c4;">Email <span style="color: #dc5843;">ranjithram878@gmail.com</span> <i class="fa-regular fa-envelope"></i></p>
+            <p style="color: #f8c4c4;">Phone <span style="color: #dc5843;">6382823550</span> <i class="fa-solid fa-phone"></i></p>
+            <div data-aos="fade-up">
+               <a href="#">View All Projects</a>
+            </div>
+         </div>
+      </div>
+   </section>
 
+   <!-- Services Section -->
+   <section class="about col-12" id="services">
+      <h2 data-aos="fade-up" class="text-center" style="color: #f8c4c4;">My <span style="color: #dc5843;">Service</span>
+      </h2>
+      <div id="services-padding" class="container">
+         <div class="row">
+            <div class="col-md-12 col-lg-4">
+               <div class="card">
+                  <img class="card-img-top p-4" src="./assets/images/services-page/web-developer.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title" style="color: #dc5843;">Web Development</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+               <div class="card">
+                  <img class="card-img-top p-4" src="./assets/images/services-page/22112061_6578716.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title" style="color: #dc5843;">Website Hosting</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+               <div class="card">
+                  <img class="card-img-top p-4" src="..." alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+            </div>
+         </div>
+      </div>
    </section>
 
    <!-- External JS -->
@@ -83,7 +141,7 @@
    <script>
       AOS.init({
          offset: 50,
-         duration: 500
+         duration: 800
       });
    </script>
 </body>
