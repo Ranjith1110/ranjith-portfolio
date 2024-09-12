@@ -113,10 +113,24 @@ a {
     height: 100vh;
     width: 300px;
     transition: all .5s ease-in-out;
+    padding: 0px 80px;
 }
 
 .slider.active {
     left: 0px;
+}
+
+.navs{
+    padding-top: 5em;
+}
+.navs>a{
+    color: var(--bs-heading-color);
+}
+.navs>a:hover{
+    color: var(--main-color);
+}
+.navs>a:not(:last-child) {
+    margin-bottom: 35px;
 }
 
 .hero {
@@ -334,8 +348,16 @@ a {
     border-radius: 10px;
     color: var(--bs-heading-color);
 }
-
-form>div>a {
+.contact-form>input::placeholder,
+.contact-form>textarea::placeholder{
+    color: var(--bs-heading-color);
+}
+.contact-form>input:focus::placeholder,
+.contact-form>textarea:focus::placeholder{
+    opacity: 0;
+    transition: .3s ease;
+}
+form>div>button {
     padding: 11px 26px;
     border: 2px solid var(--main-color);
     border-radius: 8px;
@@ -344,7 +366,7 @@ form>div>a {
     background-color: var(--black);
 }
 
-form>div>a:hover {
+form>div>button:hover {
     color: var(--bg-color);
     background-color: var(--main-color);
     box-shadow: 0px 0px 10px 0px #ec3e3e, 0px 0px 10px 0px #ec3e3e;
