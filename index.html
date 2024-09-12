@@ -34,21 +34,21 @@
          </div>
          <div class="top-btn pe-sm-3 pe-md-5 d-flex justify-content-between align-items-center">
             <a href="#contacts">Contact Me</a>
-            <a href="#" class="menu-icon ps-3 d-lg-none"><i class="fa-solid fa-bars"></i></a>
+            <a href="#slider" class="menu-icon ps-3 d-lg-none"><i class="fa-solid fa-bars"></i></a>
          </div>
       </header>
 
-      <div class="slider">
-         <ul class="nav flex-column d-md-none pt-5">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
-         </ul>
-      </div>
-
    </section>
+
+   <div id="slider" class="slider">
+      <div class="navs d-flex align-items-center flex-column d-md-none">
+         <a href="#home">Home</a>
+         <a href="#about">About</a>
+         <a href="#services">Service</a>
+         <a href="#projects">Project</a>
+         <a href="#contacts">Contact</a>
+      </div>
+   </div>
 
    <!---Hero section-->
    <section class="hero col-12" id="home">
@@ -224,14 +224,15 @@
                <h6 style="color: #f8c4c4;">Phone <span class="me-2" style="color: #ec3e3e;">6382823550</span><i
                      class="fa-solid fa-phone"></i></h6>
             </div>
-            <form action="">
+            <form action="https://api.web3forms.com/submit" method="POST">
+               <input type="hidden" name="access_key" value="08f9686b-52e2-448d-b6d7-b3347dd27499">
                <div data-aos="fade-up" class="contact-form d-flex flex-column col-md-6 mt-5">
-                  <input class="mb-4" type="text" placeholder="Your Name">
-                  <input class="mb-4" type="email" placeholder="Email">
-                  <textarea class="mb-5" name="" rows="8" id="" placeholder="Write Your Message Here"></textarea>
+                  <input name="Your Name" class="mb-4" type="text" placeholder="Your Name" required>
+                  <input name="Email" class="mb-4" type="email" placeholder="Email" required>
+                  <textarea name="Message" type="message"  class="mb-5"rows="8" placeholder="Write Your Message Here" required></textarea>
                </div>
                <div class="d-flex justify-content-center">
-                  <a href="#" type="submit">Send Message</a>
+                  <button type="submit">Send Mail</button>
                </div>
             </form>
          </div>
