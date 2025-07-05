@@ -172,8 +172,7 @@
                </div>
                <div class="col-md-12 col-lg-4 mb-4">
                   <div class="card" data-aos="fade-up">
-                     <img class="card-img-top p-4" src="assets/images/project-page/taskgo.png"
-                        alt="Card image cap">
+                     <img class="card-img-top p-4" src="assets/images/project-page/taskgo.png" alt="Card image cap">
                      <div class="card-body mb-3">
                         <h3 class="card-title mb-4" style="color: #f8c4c4;">Task Go</h3>
                         <a href="https://taskgo.in/" target="_blank" class="btn-pro">View Website</a>
@@ -192,8 +191,7 @@
                </div>
                <div class="col-md-12 col-lg-4 mb-4">
                   <div class="card" data-aos="fade-up">
-                     <img class="card-img-top p-4" src="assets/images/project-page/mamce.png"
-                        alt="Card image cap">
+                     <img class="card-img-top p-4" src="assets/images/project-page/mamce.png" alt="Card image cap">
                      <div class="card-body mb-3">
                         <h3 class="card-title mb-4" style="color: #f8c4c4;">M.A.M College of Engineering</h3>
                         <a href="https://www.mamce.org/" target="_blank" class="btn-pro">View Website</a>
@@ -206,8 +204,7 @@
                         alt="Card image cap">
                      <div class="card-body mb-3">
                         <h3 class="card-title mb-4" style="color: #f8c4c4;">Bharath First School</h3>
-                        <a href="https://bharathfirstschool.com/" target="_blank"
-                           class="btn-pro">View
+                        <a href="https://bharathfirstschool.com/" target="_blank" class="btn-pro">View
                            Website</a>
                      </div>
                   </div>
@@ -218,9 +215,7 @@
                         alt="Card image cap">
                      <div class="card-body mb-3">
                         <h3 class="card-title mb-4" style="color: #f8c4c4;">VigilixHub</h3>
-                        <a
-                           href="https://www.vigilixhub.in/"
-                           target="_blank" class="btn-pro">View Website</a>
+                        <a href="https://www.vigilixhub.in/" target="_blank" class="btn-pro">View Website</a>
                      </div>
                   </div>
                </div>
@@ -249,7 +244,8 @@
                <div data-aos="fade-up" class="contact-form d-flex flex-column col-md-6 mt-5">
                   <input name="Your Name" class="mb-4" type="text" placeholder="Your Name" required>
                   <input name="Email" class="mb-4" type="email" placeholder="Email" required>
-                  <textarea name="Message" class="mb-5" rows="8" placeholder="Write Your Message Here" required></textarea>
+                  <textarea name="Message" class="mb-5" rows="8" placeholder="Write Your Message Here"
+                     required></textarea>
                </div>
                <div class="d-flex justify-content-center">
                   <button type="submit">Send Mail</button>
@@ -264,6 +260,60 @@
          <p class="mb-0 pt-2">Copyright All Rights Reserved <i class="fa-regular fa-copyright"></i></p>
       </div>
    </footer>
+
+   <div id="cursor-wrapper">
+      <div id="cursor-dot"></div>
+      <div id="cursor-ring"></div>
+   </div>
+
+   <script>
+      const cursorDot = document.getElementById('cursor-dot');
+      const cursorRing = document.getElementById('cursor-ring');
+
+      // Position state
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      // Sound setup
+      const clickSound = new Audio('https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b7b7e.mp3');
+      clickSound.volume = 0.15;
+
+      // Update mouse position on move
+      window.addEventListener('mousemove', (e) => {
+         mouseX = e.clientX;
+         mouseY = e.clientY;
+         cursorDot.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+      });
+
+      // Animate ring with slight delay for smooth trailing effect
+      function animate() {
+         ringX += (mouseX - ringX) * 0.15;
+         ringY += (mouseY - ringY) * 0.15;
+         cursorRing.style.transform = `translate(${ringX}px, ${ringY}px) scale(1)`;
+         requestAnimationFrame(animate);
+      }
+      animate();
+
+      // Click animation and sound
+      window.addEventListener('mousedown', () => {
+         // Ripple effect on ring
+         cursorRing.style.animation = 'ripple 0.6s ease-out forwards';
+         // Change dot color briefly
+         cursorDot.style.backgroundColor = '#f8c4c4';
+         // Play click sound
+         clickSound.currentTime = 0;
+         clickSound.play();
+      });
+
+      window.addEventListener('mouseup', () => {
+         // Reset ring animation
+         cursorRing.style.animation = '';
+         // Reset dot color
+         cursorDot.style.backgroundColor = '#ff3e3e';
+      });
+   </script>
 
 
    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
