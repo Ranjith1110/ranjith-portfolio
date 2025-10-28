@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&display=swap');
+
+:root {
+  --bg-dark: #0e0e14;
+  --accent: #ff5757;
+  --light: #f5f5f5;
+  --subtle: #b3b3b3;
+  --panel: #1b1b24;
+  --radius: 14px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Bitcount Grid Single", system-ui !important;
+  color: var(--light);
+  background-color: var(--bg-dark);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+/* ===== Header ===== */
+header {
+  text-align: center;
+  padding: 25px 10px;
+  background-color: var(--panel);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+header h1 {
+  font-size: 2rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+/* ===== Canvas Area ===== */
+main {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameCanvas {
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  background-color: #14141f;
+  height: 75vh;
+  z-index: 1;
+}
+
+/* ===== Game UI (Overlay Screens) ===== */
+.gameUI {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(17, 17, 24, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.gameUI.active {
+  display: flex;
+}
+
+.ui-content {
+  background: var(--panel);
+  padding: 30px 50px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 87, 87, 0.15);
+  max-width: 400px;
+}
+
+.ui-content h2 {
+  margin-bottom: 15px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ui-content p {
+  margin: 10px 0;
+  color: var(--subtle);
+  font-size: 0.95rem;
+}
+
+/* ===== Buttons ===== */
+button {
+  background-color: var(--accent);
+  color: var(--light);
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 25px;
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: "Bitcount Grid Single", system-ui !important;
+}
+
+button:hover {
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  color: var(--subtle);
+  background-color: var(--panel);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+footer a {
+  color: var(--accent);
+  font-weight: 500;
+}
