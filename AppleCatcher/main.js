@@ -6,8 +6,9 @@ const sizes = {
   height: 500,
 };
 
-const baseSpeed = 300; // starting speed
+const baseSpeed = 300; // Starting fall speed
 let currentSpeed = baseSpeed;
+let currentPlayerSpeed = baseSpeed + 50; // Basket movement speed
 
 const gameStartDiv = document.querySelector("#gameStartDiv");
 const gameStartBtn = document.querySelector("#gameStartBtn");
@@ -20,7 +21,6 @@ class GameScene extends Phaser.Scene {
     super("scene-game");
     this.player;
     this.cursor;
-    this.playerSpeed = baseSpeed + 50;
     this.target;
     this.points = 0;
     this.textScore;
@@ -30,6 +30,7 @@ class GameScene extends Phaser.Scene {
     this.coinMusic;
     this.bgMusic;
     this.emitter;
+    this.isTouching = false;
   }
 
   preload() {
@@ -72,8 +73,23 @@ class GameScene extends Phaser.Scene {
     // Collision
     this.physics.add.overlap(this.target, this.player, this.targetHit, null, this);
 
-    // Controls
+    // Keyboard Controls
     this.cursor = this.input.keyboard.createCursorKeys();
+
+    // Touch Controls (for mobile)
+    this.input.on("pointerdown", (pointer) => {
+      this.isTouching = true;
+      this.handleTouch(pointer);
+    });
+
+    this.input.on("pointermove", (pointer) => {
+      if (this.isTouching) this.handleTouch(pointer);
+    });
+
+    this.input.on("pointerup", () => {
+      this.isTouching = false;
+      this.player.setVelocityX(0);
+    });
 
     // UI Text
     this.textScore = this.add.text(sizes.width - 120, 10, "Score: 0", {
@@ -108,14 +124,26 @@ class GameScene extends Phaser.Scene {
       this.resetApple();
     }
 
+    // Keyboard control for desktop
     const { left, right } = this.cursor;
 
     if (left.isDown) {
-      this.player.setVelocityX(-this.playerSpeed);
+      this.player.setVelocityX(-currentPlayerSpeed);
     } else if (right.isDown) {
-      this.player.setVelocityX(this.playerSpeed);
-    } else {
+      this.player.setVelocityX(currentPlayerSpeed);
+    } else if (!this.isTouching) {
       this.player.setVelocityX(0);
+    }
+  }
+
+  handleTouch(pointer) {
+    const touchX = pointer.x;
+
+    // Move basket left or right depending on where player touched
+    if (touchX < sizes.width / 2) {
+      this.player.setVelocityX(-currentPlayerSpeed);
+    } else {
+      this.player.setVelocityX(currentPlayerSpeed);
     }
   }
 
@@ -130,8 +158,9 @@ class GameScene extends Phaser.Scene {
     this.points++;
     this.textScore.setText(`Score: ${this.points}`);
 
-    // Increase speed when apple is caught
-    currentSpeed += 15; // Adjust this number for more or less acceleration
+    // Increase both apple and basket speed
+    currentSpeed += 15;
+    currentPlayerSpeed += 10; // Basket also speeds up
     this.physics.world.gravity.y = currentSpeed;
 
     this.target.setY(0);
@@ -142,6 +171,7 @@ class GameScene extends Phaser.Scene {
   resetApple() {
     // Missed apple also speeds up
     currentSpeed += 10;
+    currentPlayerSpeed += 5;
     this.physics.world.gravity.y = currentSpeed;
 
     this.target.setY(0);
@@ -153,8 +183,7 @@ class GameScene extends Phaser.Scene {
     this.sys.game.destroy(true);
 
     gameEndScoreSpan.textContent = this.points;
-    gameWinLoseSpan.textContent =
-      this.points >= 10 ? "Win! 😊" : "Lose! 😭";
+    gameWinLoseSpan.textContent = this.points >= 10 ? "Win! 😊" : "Lose! 😭";
 
     gameEndDiv.style.display = "flex";
   }
