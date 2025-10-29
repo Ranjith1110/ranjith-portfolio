@@ -59,9 +59,9 @@ main {
   border: 2px solid var(--accent);
   border-radius: var(--radius);
   background-color: #14141f;
-  width: 80vw;
+  /* width: 80vw; */
   height: 70vh;
-  max-width: 800px;
+  /* max-width: 100%; */
   max-height: 500px;
   z-index: 1;
   transition: 0.3s ease;

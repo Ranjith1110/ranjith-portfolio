@@ -6,31 +6,30 @@ const sizes = {
   height: 500,
 };
 
-const speedDown = 300;
+const baseSpeed = 300; // starting speed
+let currentSpeed = baseSpeed;
 
-const gameStartDiv = document.querySelector("#gameStartDiv")
-const gameStartBtn = document.querySelector("#gameStartBtn")
-const gameEndDiv = document.querySelector("#gameEndDiv")
-const gameWinLoseSpan = document.querySelector("#gameWinLoseSpan")
-const gameEndScoreSpan = document.querySelector("#gameEndScoreSpan")
-
-
+const gameStartDiv = document.querySelector("#gameStartDiv");
+const gameStartBtn = document.querySelector("#gameStartBtn");
+const gameEndDiv = document.querySelector("#gameEndDiv");
+const gameWinLoseSpan = document.querySelector("#gameWinLoseSpan");
+const gameEndScoreSpan = document.querySelector("#gameEndScoreSpan");
 
 class GameScene extends Phaser.Scene {
   constructor() {
     super("scene-game");
     this.player;
     this.cursor;
-    this.playerSpeed = speedDown + 50;
+    this.playerSpeed = baseSpeed + 50;
     this.target;
-    this.points = 0
-    this.textScore
-    this.textTime
-    this.timedEvent
-    this.remainingTime
-    this.coinMusic
-    this.bgMusic
-    this.emitter
+    this.points = 0;
+    this.textScore;
+    this.textTime;
+    this.timedEvent;
+    this.remainingTime;
+    this.coinMusic;
+    this.bgMusic;
+    this.emitter;
   }
 
   preload() {
@@ -43,32 +42,41 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.scene.pause("scene-game");
 
-    this.scene.pause("scene-game")
+    this.coinMusic = this.sound.add("coin");
+    this.bgMusic = this.sound.add("bgMusic", { loop: true, volume: 0.4 });
+    this.bgMusic.play();
 
-    this.coinMusic = this.sound.add("coin")
-    this.bgMusic=this.sound.add("bgMusic")
-    this.bgMusic.play()
-    // this.bgMusic.stop()
-
-
+    // Background
     this.add.image(0, 0, "bg").setOrigin(0, 0);
+
+    // Player basket
     this.player = this.physics.add
-      .image(0, sizes.height - 100, "basket")
+      .image(sizes.width / 2 - 40, sizes.height - 100, "basket")
       .setOrigin(0, 0);
     this.player.setImmovable(true);
     this.player.body.allowGravity = false;
     this.player.setCollideWorldBounds(true);
-    this.player.setSize(this.player.width-this.player.width/4, this.player.height/6).setOffset(this.player.width/10, this.player.height - this.player.height/10);
+    this.player
+      .setSize(this.player.width - this.player.width / 4, this.player.height / 6)
+      .setOffset(
+        this.player.width / 10,
+        this.player.height - this.player.height / 10
+      );
 
-    this.target = this.physics.add.image(0, 0, "apple").setOrigin(0, 0);
-    this.target.setMaxVelocity(0, speedDown);
+    // Apple
+    this.target = this.physics.add.image(this.getRandomX(), 0, "apple").setOrigin(0, 0);
+    this.target.setMaxVelocity(0, currentSpeed);
 
-    this.physics.add.overlap(this.target,this.player,this.targetHit, null, this)
+    // Collision
+    this.physics.add.overlap(this.target, this.player, this.targetHit, null, this);
 
+    // Controls
     this.cursor = this.input.keyboard.createCursorKeys();
 
-    this.textScore = this.add.text(sizes.width - 120, 10, "Score:0", {
+    // UI Text
+    this.textScore = this.add.text(sizes.width - 120, 10, "Score: 0", {
       font: "25px Arial",
       fill: "#000000",
     });
@@ -77,27 +85,27 @@ class GameScene extends Phaser.Scene {
       fill: "#000000",
     });
 
-    this.timedEvent = this.time.delayedCall(30000,this.gameOver,[], this)
+    // Timer
+    this.timedEvent = this.time.delayedCall(30000, this.gameOver, [], this);
 
-    this.emitter=this.add.particles(0,0,"money",{
-      speed:100,
-      gravityY:speedDown-200,
-      scale:0.04,
-      duration:100,
-      emitting:false
-    })
-    this.emitter.startFollow(this.player, this.player.width / 2, this.player.height / 2,true);
-
+    // Particle emitter
+    this.emitter = this.add.particles(0, 0, "money", {
+      speed: 100,
+      gravityY: baseSpeed - 200,
+      scale: 0.04,
+      duration: 100,
+      emitting: false,
+    });
+    this.emitter.startFollow(this.player, this.player.width / 2, this.player.height / 2, true);
   }
 
   update() {
-    this.remainingTime=this.timedEvent.getRemainingSeconds()
-    this.textTime.setText(`Remaining Time: ${Math.round(this.remainingTime).toString()}`)
+    this.remainingTime = this.timedEvent.getRemainingSeconds();
+    this.textTime.setText(`Remaining Time: ${Math.round(this.remainingTime)}`);
 
-
+    // If apple hits ground, reset & speed up
     if (this.target.y >= sizes.height) {
-      this.target.setY(0);
-      this.target.setX(this.getRandomX())
+      this.resetApple();
     }
 
     const { left, right } = this.cursor;
@@ -112,32 +120,44 @@ class GameScene extends Phaser.Scene {
   }
 
   getRandomX() {
-    return Math.floor(Math.random() * 480);
+    return Math.floor(Math.random() * (sizes.width - 40));
   }
 
   targetHit() {
-    this.coinMusic.play()
-    this.emitter.start()
+    this.coinMusic.play();
+    this.emitter.start();
+
+    this.points++;
+    this.textScore.setText(`Score: ${this.points}`);
+
+    // Increase speed when apple is caught
+    currentSpeed += 15; // Adjust this number for more or less acceleration
+    this.physics.world.gravity.y = currentSpeed;
+
     this.target.setY(0);
     this.target.setX(this.getRandomX());
-    this.points++;
-    this.textScore.setText(`Score: ${this.points}`)
+    this.target.setMaxVelocity(0, currentSpeed);
   }
 
-  gameOver(){
-    this.sys.game.destroy(true)
-    if(this.points >=10){
-      gameEndScoreSpan.textContent = this.points
-      gameWinLoseSpan.textContent= "Win! 😊"
+  resetApple() {
+    // Missed apple also speeds up
+    currentSpeed += 10;
+    this.physics.world.gravity.y = currentSpeed;
 
-    }else{
-      gameEndScoreSpan.textContent = this.points
-      gameWinLoseSpan.textContent= "Lose! 😭"
-    }
-
-    gameEndDiv.style.display="flex"
+    this.target.setY(0);
+    this.target.setX(this.getRandomX());
+    this.target.setMaxVelocity(0, currentSpeed);
   }
 
+  gameOver() {
+    this.sys.game.destroy(true);
+
+    gameEndScoreSpan.textContent = this.points;
+    gameWinLoseSpan.textContent =
+      this.points >= 10 ? "Win! 😊" : "Lose! 😭";
+
+    gameEndDiv.style.display = "flex";
+  }
 }
 
 const config = {
@@ -148,8 +168,8 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: speedDown },
-      debug: true,
+      gravity: { y: baseSpeed },
+      debug: false,
     },
   },
   scene: [GameScene],
@@ -157,7 +177,7 @@ const config = {
 
 const game = new Phaser.Game(config);
 
-gameStartBtn.addEventListener("click", ()=>{
-  gameStartDiv.style.display="none"
-  game.scene.resume("scene-game")
-})
+gameStartBtn.addEventListener("click", () => {
+  gameStartDiv.style.display = "none";
+  game.scene.resume("scene-game");
+});
