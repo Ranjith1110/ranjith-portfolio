@@ -21,6 +21,7 @@ body {
   font-family: "Bitcount Grid Single", system-ui !important;
   color: var(--light);
   background-color: var(--bg-dark);
+  overflow-x: hidden;
 }
 
 body {
@@ -51,14 +52,19 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px;
 }
 
 #gameCanvas {
   border: 2px solid var(--accent);
   border-radius: var(--radius);
   background-color: #14141f;
-  height: 75vh;
+  width: 80vw;
+  height: 70vh;
+  max-width: 800px;
+  max-height: 500px;
   z-index: 1;
+  transition: 0.3s ease;
 }
 
 /* ===== Game UI (Overlay Screens) ===== */
@@ -71,6 +77,7 @@ main {
   align-items: center;
   flex-direction: column;
   z-index: 2;
+  padding: 20px;
 }
 
 .gameUI.active {
@@ -84,12 +91,15 @@ main {
   text-align: center;
   box-shadow: 0 0 25px rgba(255, 87, 87, 0.15);
   max-width: 400px;
+  width: 90%;
+  transition: 0.3s ease;
 }
 
 .ui-content h2 {
   margin-bottom: 15px;
   color: var(--accent);
   font-weight: 600;
+  font-size: 1.6rem;
 }
 
 .ui-content p {
@@ -133,4 +143,69 @@ footer {
 footer a {
   color: var(--accent);
   font-weight: 500;
+}
+
+/* ===== Responsive Design ===== */
+
+/* Tablets */
+@media (max-width: 992px) {
+  header h1 {
+    font-size: 1.7rem;
+  }
+
+  #gameCanvas {
+    width: 85vw;
+    height: 65vh;
+  }
+
+  .ui-content {
+    padding: 25px 35px;
+  }
+
+  .ui-content h2 {
+    font-size: 1.4rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 8px 20px;
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  main {
+    padding: 10px;
+  }
+
+  #gameCanvas {
+    width: 95vw;
+    height: 60vh;
+  }
+
+  .ui-content {
+    padding: 20px 25px;
+  }
+
+  .ui-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .ui-content p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    width: 80%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+  }
 }
